@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://twlottocolor.netlify.app/sitemap.xml
+Sitemap: https://twlottocolor.vercel.app/sitemap.xml
