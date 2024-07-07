@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>威力彩-選號器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #lottery-balls {
+            margin: 20px 0;
+        }
+
+        .ball {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            background-color: #ffcc00; /* 黃色背景 */
+            color: #000; /* 黑色文字 */
+            font-size: 20px;
+            margin: 5px;
+            text-align: center;
+        }
+        .h2-one {
+          font-size:20px;
+        }
+        p {
+                    text-align:center;
+        }
+              .span-index-one {
+        margin-left:-210px;
+        margin-top:4px;
+        font-size:20px;
+        margin-right:-2px;
+        color:#000000;
+      }
+            a {
+        text-decoration:none;
+      }
+      .p {
+        margin-left:-260px;
+      }
+      .h4-lotto-two one {
+        margin-right:30px;
+      }
+      .hst-index {
+      padding-left:50px;
+      }
+      .copy {
+        color:#FFFFFF;
+        background-color:#000000;
+         margin-bottom:200px;
+      padding-bottom:30px;
+      padding-top:30px;
+      margin-bottom:-200px;
+      text-align:center;
+      margin-right:-30px;
+      margin-left:-30px;
+          margin-top:480px;
+            
+      }
+    </style>
+</head>
+<body>
+  <fieldset class="fst-index">
+     <a href="index.html" class="span-index-one">台灣彩卷-選號機</a>
+     <p></p>
+<a href="index.html" class="p">首頁</a>
+    <a href="lotto638-1/8.html" class="h4-lotto-two one">威力彩</a>
+  </fieldset>
+    <h2 class="h2-one">大樂透-選號器</h2>
+    <p>中獎機率:1/117</p>
+    <div id="lottery-balls"></div>
+    <select id="combo-select">
+        <option value="6">單注</option>
+        <option value="7">7連碰</option>
+        <option value="8">8連碰</option>
+        <option value="9">9連碰</option>
+        <option value="10">10連碰</option>
+        <option value="11">11連碰</option>
+        <option value="12">12連碰</option>
+        <option value="13">13連碰</option>
+        <option value="14">14連碰</option>
+        <option value="15">15連碰</option>
+        <option value="16">16連碰</option>
+    </select>
+    <p></p>
+    <button id="start-button">開始</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM 已經加載完成");
+            document.getElementById('start-button').addEventListener('click', function() {
+                console.log("開始按鈕被點擊");
+                const comboCount = parseInt(document.getElementById('combo-select').value);
+                console.log("選擇的連碰數量:", comboCount);
+                const selectedNumbers = generateNumbers(comboCount);
+                console.log("選出的號碼:", selectedNumbers);
+                displayNumbers(selectedNumbers);
+            });
+        });
+
+        function generateNumbers(count) {
+            console.log("生成號碼，數量:", count);
+            const numbers = Array.from({ length: 49 }, (_, i) => i + 1);
+            const selectedNumbers = [];
+            for (let i = 0; i < count; i++) {
+                const randomIndex = Math.floor(Math.random() * numbers.length);
+                selectedNumbers.push(numbers[randomIndex]);
+                numbers.splice(randomIndex, 1);
+            }
+            console.log("生成的號碼為:", selectedNumbers);
+            return selectedNumbers;
+        }
+
+        function displayNumbers(numbers) {
+            console.log("顯示號碼:", numbers);
+            const lotteryBallsDiv = document.getElementById('lottery-balls');
+            lotteryBallsDiv.innerHTML = '';
+            numbers.forEach(number => {
+                const ball = document.createElement('div');
+                ball.className = 'ball';
+                ball.textContent = number;
+                lotteryBallsDiv.appendChild(ball);
+            });
+            console.log("號碼球已顯示");
+        }
+    </script>
+    <footer class="copy">
+      2024|&copy;|youxiang|請勿盜用|盜用必究
+    </footer>
+</body>
+</html>
