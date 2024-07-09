@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>威力彩-選號器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .number-ball {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin: 5px;
+            font-weight: bold;
+        }
+        .green-ball {
+            background-color: green;
+            color: white;
+        }
+        .red-ball {
+            background-color: red;
+            color: white;
+        }
+        .result-section {
+            margin-top: 20px;
+        }
+        .fop {
+          background-color:#000000;
+          color: #FFFFFF;
+          margin-left:-30px;
+          margin-right:-30px;
+          margin-top:800px;
+          padding-top:30px;
+          padding-bottom:30px;
+          text-align:center;
+        }
+      a {
+        text-decoration:none;
+      }
+      .none {
+        margin-left:3px;
+      }
+    </style>
+</head>
+<body>
+  
+  <a href="index.html">首頁</a>
+  <a href="lotto649.html" class="none">大樂透</a>
+    <h1>威力彩-選號器</h1>
+    <p style="text-align:center">中獎機率:1/28</p>
+    <label for="first-selection">第一區選號方式:</label>
+    <select id="first-selection">
+        <option value="6">單注</option>
+        <option value="7">7連碰</option>
+        <option value="8">8連碰</option>
+        <option value="9">9連碰</option>
+        <option value="10">10連碰</option>
+        <option value="11">11連碰</option>
+        <option value="12">12連碰</option>
+        <option value="13">13連碰</option>
+        <option value="14">14連碰</option>
+        <option value="15">15連碰</option>
+        <option value="16">16連碰</option>
+    </select>
+    <br><br>
+    <button onclick="generateNumbers()">開始</button>
+    <p></p>
+    <br><br>
+    <div class="result-section" id="result-section"></div>
+    <br>
+    <label for="second-selection">第二區選號方式:</label>
+    <select id="second-selection">
+        <option value="1">單注</option>
+        <option value="2">2連碰</option>
+        <option value="3">3連碰</option>
+        <option value="4">4連碰</option>
+        <option value="5">5連碰</option>
+        <option value="6">6連碰</option>
+        <option value="7">7連碰</option>
+        <option value="8">8連碰</option>
+    </select>
+    <br><br>
+    <script>
+        function generateNumbers() {
+            let firstCount = parseInt(document.getElementById('first-selection').value);
+            let secondCount = parseInt(document.getElementById('second-selection').value);
+
+            let firstNumbers = getRandomNumbers(38, firstCount);
+            displayNumbers(firstNumbers, 'result-section', 'green-ball');
+
+            let secondNumbers = getRandomNumbers(8, secondCount, firstNumbers);
+            displayNumbers(secondNumbers, 'result-section', 'red-ball', true);
+        }
+
+        function getRandomNumbers(max, count, exclude = []) {
+            let numbers = [];
+            while (numbers.length < count) {
+                let num = Math.floor(Math.random() * max) + 1;
+                if (!numbers.includes(num) && !exclude.includes(num)) {
+                    numbers.push(num);
+                }
+            }
+            return numbers.sort((a, b) => a - b);
+        }
+
+        function displayNumbers(numbers, elementId, className, append = false) {
+            let container = document.getElementById(elementId);
+            if (!append) {
+                container.innerHTML = '';
+            }
+            numbers.forEach(num => {
+                let ball = document.createElement('div');
+                ball.className = `number-ball ${className}`;
+                ball.innerText = num;
+                container.appendChild(ball);
+            });
+        }
+    </script>
+    <footer class="fop">
+      2024|youxiang|請勿盜用|盜用必究
+    </footer>
+</body>
+</html>
